@@ -6,8 +6,9 @@ class Quizzler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -25,6 +26,22 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> scorekeeper = [];
+
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.',
+  ];
+
+  List<bool> answers = [
+    false,
+    true,
+    true,
+  ];
+
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,7 +54,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questions[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -53,16 +70,25 @@ class _QuizPageState extends State<QuizPage> {
             // ignore: deprecated_member_use
             child: FlatButton(
               textColor: Colors.white,
-              color: Colors.green,
+              color: Colors.white,
               child: Text(
                 'True',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.blue,
                   fontSize: 20.0,
                 ),
               ),
               onPressed: () {
-                //The user picked true.
+                setState(() {
+                  bool correctanswer = answers[questionNumber];
+
+                  if (correctanswer == true) {
+                    print('You got it right');
+                  } else {
+                    print('You got it wrong');
+                  }
+                  questionNumber++;
+                });
               },
             ),
           ),
@@ -72,29 +98,33 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(15.0),
             // ignore: deprecated_member_use
             child: FlatButton(
-              color: Colors.red,
+              color: Colors.white,
               child: Text(
                 'False',
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Colors.white,
+                  color: Colors.blue,
                 ),
               ),
               onPressed: () {
-                //The user picked false.
+                bool correctanswer = answers[questionNumber];
+
+                if (correctanswer == false) {
+                  print('You got it right');
+                } else {
+                  print('You got it wrong');
+                }
+                setState(() {
+                  questionNumber++;
+                });
               },
             ),
           ),
         ),
-        // ignore: todo
-        //TODO: Add a Row here as your score keeper
+        Row(
+          children: scorekeeper,
+        )
       ],
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
