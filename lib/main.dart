@@ -34,6 +34,7 @@ class _QuizPageState extends State<QuizPage> {
   void checkSelection(bool userChoice) {
     bool correctanswer = quizBrain.getQuestionAnswer();
     setState(() {
+      if (userChoice == correctanswer) {
         scorekeeper.add(
           Icon(
             Icons.check,
