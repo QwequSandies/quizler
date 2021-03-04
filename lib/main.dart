@@ -37,10 +37,22 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       if (quizBrain.isFinished() == true) {
         Alert(
-                context: context,
-                title: "FINISHED",
-                desc: "You/'ve reached the end of the quiz")
-            .show();
+          context: context,
+          type: AlertType.info,
+          title: "FINISHED",
+          desc: "You/'ve reached the end of the quiz",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "RESTART",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              color: Colors.blue,
+              radius: BorderRadius.circular(0.0),
+            ),
+          ],
+        ).show();
         quizBrain.reset();
         scorekeeper = [];
       } else {
