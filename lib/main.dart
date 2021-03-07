@@ -40,7 +40,7 @@ class _QuizPageState extends State<QuizPage> {
           context: context,
           type: AlertType.info,
           title: "FINISHED",
-          desc: "You/'ve reached the end of the quiz",
+          desc: "You have reached the end of the quiz",
           buttons: [
             DialogButton(
               child: Text(
